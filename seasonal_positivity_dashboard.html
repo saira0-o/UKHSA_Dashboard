@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seasonal Positivity Charts</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: system-ui, sans-serif;
+      color: #202124;
+      background: #f6f8fa;
+    }
+
+    body {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .year-picker {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    select {
+      padding: 0.5rem 0.75rem;
+      font: inherit;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr));
+      gap: 1rem;
+    }
+
+    figure {
+      margin: 0;
+      padding: 0.75rem;
+      background: white;
+      border: 1px solid #d0d7de;
+      border-radius: 0.5rem;
+    }
+
+    figcaption {
+      margin: 0.25rem 0 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Seasonal Positivity Charts</h1>
+    <div class="year-picker">
+      <label for="year-select">Select year:</label>
+      <select id="year-select">
+        <option value="2026" selected>2026</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+      </select>
+    </div>
+    <p>
+      Seasons are grouped as Spring (March–May), Summer (June–August),
+      Autumn (September–November), and Winter (December–February).
+    </p>
+
+    <section id="charts-2026" class="chart-grid" aria-label="2026 charts">
+      <figure>
+        <figcaption>2026 so far</figcaption>
+        <img src="2026_seasonal_positivity.png" alt="Observed 2026 seasonal positivity for RSV, influenza, and COVID-19">
+      </figure>
+      <figure>
+        <figcaption>2026 predicted forecast</figcaption>
+        <img src="2026_seasonal_positivity_prediction.png" alt="Projected 2026 seasonal positivity for RSV, influenza, and COVID-19">
+      </figure>
+    </section>
+
+    <section id="charts-2025" class="chart-grid" aria-label="2025 charts" hidden>
+      <figure><img src="2025_seasonal_positivity.png" alt="2025 seasonal positivity for RSV, influenza, and COVID-19"></figure>
+    </section>
+    <section id="charts-2024" class="chart-grid" aria-label="2024 charts" hidden>
+      <figure><img src="2024_seasonal_positivity.png" alt="2024 seasonal positivity for RSV, influenza, and COVID-19"></figure>
+    </section>
+    <section id="charts-2023" class="chart-grid" aria-label="2023 charts" hidden>
+      <figure><img src="2023_seasonal_positivity.png" alt="2023 seasonal positivity for RSV, influenza, and COVID-19"></figure>
+    </section>
+    <section id="charts-2022" class="chart-grid" aria-label="2022 charts" hidden>
+      <figure><img src="2022_seasonal_positivity.png" alt="2022 seasonal positivity for RSV, influenza, and COVID-19"></figure>
+    </section>
+    <section id="charts-2021" class="chart-grid" aria-label="2021 charts" hidden>
+      <figure><img src="2021_seasonal_positivity.png" alt="2021 seasonal positivity for RSV, influenza, and COVID-19"></figure>
+    </section>
+    <section id="charts-2020" class="chart-grid" aria-label="2020 charts" hidden>
+      <figure><img src="2020_seasonal_positivity.png" alt="2020 seasonal positivity for RSV, influenza, and COVID-19"></figure>
+    </section>
+  </main>
+
+  <script>
+    const yearSelect = document.getElementById("year-select");
+    const chartSections = document.querySelectorAll("main > section");
+
+    function showSelectedYear() {
+      for (const section of chartSections) {
+        section.hidden = section.id !== `charts-${yearSelect.value}`;
+      }
+    }
+
+    yearSelect.addEventListener("change", showSelectedYear);
+    showSelectedYear();
+  </script>
+</body>
+</html>
